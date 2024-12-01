@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virus King - Chapitre 1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #111;
+            color: #f2f2f2;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Barre de navigation en haut */
+        .nav-bar {
+            width: 100%;
+            background-color: #222;
+            padding: 15px 0;
+            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 16px;
+        }
+
+        .nav-bar a {
+            color: #f2f2f2;
+            text-decoration: none;
+            padding: 12px 16px;
+            margin: 0 8px;
+            border-radius: 8px;
+            border: 1px solid #444;
+            transition: background-color 0.3s ease;
+        }
+
+        .nav-bar a:hover {
+            background-color: #444;
+        }
+
+        .nav-bar .home {
+            margin-left: 10px;
+        }
+
+        /* Icône pour ouvrir/fermer le répertoire des chapitres */
+        .directory-icon {
+            font-size: 20px;
+            color: #f2f2f2;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 5px;
+            background-color: #222;
+            transition: background-color 0.3s ease;
+        }
+
+        .directory-icon:hover {
+            background-color: #444;
+        }
+
+        /* Répertoire des chapitres avec défilement vertical */
+        .chapter-directory {
+            position: absolute;
+            top: 75px;
+            right: 50%;
+            transform: translateX(50%);
+            background-color: #222;
+            padding: 15px;
+            color: #f2f2f2;
+            display: none;
+            border-radius: 10px;
+            width: 200px;
+            max-height: 400px;
+            overflow-y: auto;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+            z-index: 999; /* Assurez-vous que le répertoire apparaisse au-dessus du contenu */
+        }
+
+        .chapter-directory a {
+            display: block;
+            color: #f2f2f2;
+            font-size: 16px;
+            margin: 8px;
+            text-decoration: none;
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #444;
+            transition: background-color 0.3s ease;
+            box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .chapter-directory a:hover {
+            background-color: #444;
+        }
+
+        /* Contenu principal */
+        .content {
+            margin-top: 80px;
+            width: 100%;
+            text-align: center;
+            padding: 10px;
+            overflow-y: auto;
+            flex-grow: 1;
+        }
+
+        h1 {
+            font-size: 36px;
+            color: #f2f2f2;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+        }
+
+        img {
+            width: 100%;
+            max-width: 800px;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        /* Styles spécifiques pour mobile */
+        @media only screen and (max-width: 768px) {
+            .nav-bar a {
+                font-size: 12px;
+                padding: 6px 8px;
+            }
+
+            .chapter-directory {
+                width: 180px;
+                top: 50px;
+            }
+
+            .directory-icon {
+                font-size: 18px;
+            }
+        }
+
+        /* Utilisation d'un hack de checkbox pour afficher ou cacher le répertoire */
+        #menu-toggle {
+            display: none;
+        }
+
+        #menu-toggle:checked + .chapter-directory {
+            display: block;
+        }
+
+        #menu-toggle:checked + .chapter-directory + .overlay {
+            display: block;
+        }
+
+        /* Fond d'overlay pour fermer le menu lorsque vous cliquez en dehors */
+        .overlay {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5); /* Ombre semi-transparente */
+            z-index: 998;
+        }
+
+        /* Styles pour les boutons Chapitre Précédent et Suivant */
+        .navigation-buttons {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            width: 100%;
+            padding: 0 20px;
+        }
+
+        .navigation-buttons a {
+            text-decoration: none;
+            background-color: #222;
+            color: #f2f2f2;
+            padding: 12px 16px;
+            border-radius: 8px;
+            border: 1px solid #444;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        .navigation-buttons a:hover {
+            background-color: #444;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Barre de navigation en haut -->
+<div class="nav-bar">
+    <a href="chapter1.html" class="chapters">Chapitre Précédent</a>
+    <div class="home-and-icon" style="display: flex; align-items: center; justify-content: center; flex-grow: 1;">
+        <a href="https://digital-rectangle-161412.framer.app/" class="home">Accueil</a>
+        <label for="menu-toggle" class="directory-icon">
+            <i class="fas fa-bars"></i>
+        </label>
+    </div>
+    <a href="chapter2.html" class="chapters">Chapitre Suivant</a>
+</div>
+
+<!-- Répertoire des chapitres (visible quand le menu-toggle est activé) -->
+<input type="checkbox" id="menu-toggle">
+<div class="chapter-directory">
+       <a href="chapter1.html">Chapitre 01</a>
+    <a href="chapter2.html">Chapitre 02</a>
+    <a href="chapter3.html">Chapitre 03</a>
+</div>
+
+<!-- Fond d'overlay pour fermer le répertoire lorsque vous cliquez en dehors -->
+<div class="overlay" onclick="document.getElementById('menu-toggle').checked = false;"></div>
+
+<!-- Contenu principal -->
+<div class="content">
+<h1>Virus King - Chapitre 3</h1>
+<img src="images/chapter1/01.jpg" alt="Page 01">
+<img src="images/chapter1/02.jpg" alt="Page 02">
+<img src="images/chapter1/03.jpg" alt="Page 03">
+<img src="images/chapter1/04.jpg" alt="Page 04">
+<img src="images/chapter1/05.jpg" alt="Page 05">
+<img src="images/chapter1/06.jpg" alt="Page 06">
+<img src="images/chapter1/07.jpg" alt="Page 07">
+<img src="images/chapter1/08.jpg" alt="Page 08">
+<img src="images/chapter1/09.jpg" alt="Page 09">
+<img src="images/chapter1/10.jpg" alt="Page 10">
+<img src="images/chapter1/11.jpg" alt="Page 11">
+<img src="images/chapter1/12.jpg" alt="Page 12">
+</div>
+
+<!-- Boutons Chapitre Précédent et Chapitre Suivant en bas -->
+<div class="navigation-buttons">
+    <a href="chapter1.html">Chapitre Précédent</a>
+    <a href="chapter2.html">Chapitre Suivant</a>
+</div>
+
+</body>
+</html>
+
+

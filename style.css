@@ -1,0 +1,81 @@
+/* Style global pour le site */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #111;
+    color: #f2f2f2;
+    text-align: center;
+}
+
+/* En-tête */
+header {
+    padding: 20px;
+    background-color: #222;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+header h1 {
+    font-size: 40px;
+    margin: 0;
+    color: #00ccff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+header p {
+    font-size: 18px;
+    color: #ccc;
+    margin-top: 10px;
+}
+
+/* Liste des chapitres */
+.chapters-list {
+    padding: 30px 10px;
+}
+
+.chapters-list h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #00ccff;
+}
+
+/* Grille des chapitres */
+.chapters-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+.chapter-card {
+    background-color: #222;
+    padding: 20px;
+    border-radius: 10px;
+    text-decoration: none;
+    color: #00ccff;
+    font-size: 20px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.3s, background-color 0.3s;
+    border: 2px solid transparent;
+}
+
+.chapter-card:hover {
+    transform: translateY(-5px);
+    background-color: #00ccff;
+    color: #111;
+    border-color: #00ccff;
+}
+
+/* Pied de page */
+footer {
+    padding: 10px;
+    background-color: #222;
+    color: #ccc;
+    font-size: 14px;
+    margin-top: 20px;
+}
